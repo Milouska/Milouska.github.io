@@ -1,0 +1,9 @@
+@keyframes logo-animation {
+    from {
+        scale: 90%;
+    }
+
+    to {
+        scale: 100%;
+    }
+}
