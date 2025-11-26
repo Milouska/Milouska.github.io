@@ -91,7 +91,7 @@ function toggleNav(){
 
 
 //CLICK to close navigation
-const prom = document.querySelector("nav div");
+const prom = document.querySelector("nav + div");
 
 prom.addEventListener("click", () => {
     header.classList.remove("nav-open");

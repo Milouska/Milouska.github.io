@@ -62,15 +62,13 @@
             display: block;
         }
 
-        &.nav-open nav {
-            div {
-                opacity: 0.7;
-                pointer-events: all;
-                left: var(--sidebar-width);
-            }
+        &.nav-open nav + div {
+            opacity: 0.7;
+            pointer-events: all;
         }
 
         nav {
+            z-index: 3;
             width: var(--sidebar-width);
             background-color: #14161d;
             border-right: 5px dotted #391e4e;
@@ -80,14 +78,14 @@
             padding-top: 48px;
             bottom: 0;
 
-            div {
+            & + div {
                 transition: all ease-in 0.3s;
                 background-color: #14161d;
                 inset: 0;
                 opacity: 0;
                 position: fixed;
                 z-index: -1;
-                left: 0;
+                left: 0px;
                 pointer-events: none;
             }
         }
