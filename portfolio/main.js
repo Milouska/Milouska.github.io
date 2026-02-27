@@ -225,7 +225,7 @@ if (window.location.hash) {
     const hash = window.location.hash.substring(1);
     changePage(hash);
 } else {
-    changePage(0);
+    changePage("hello");
 }
 
 //LIGHT/DARK MODE SWITCH
