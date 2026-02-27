@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+    <link rel="preload" href="./images/S.jpg" as="image" />
+    <link rel="preload" href="./images/SZ.jpg" as="image" />
+    <link rel="preload" href="./images/SV.jpg" as="image" />
+    <link rel="preload" href="./images/V.jpg" as="image" />
+    <link rel="preload" href="./images/Z.jpg" as="image" />
+    <link rel="preload" href="./images/JZ.jpg" as="image" />
+    <link rel="preload" href="./images/JV.jpg" as="image" />
+    <link rel="preload" href="./images/J.jpg" as="image" />
+    <link href="https://fonts.googleapis.com/css2?family=Kedebideri:wght@400;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAN KRAMPLA</title>
+</head>
+<body>
+    <nav>
+        <div class="coin" data-link="hello"></div>
+        <ul>
+            <li data-link="about">ABOUT</li>
+            <li data-link="games">GAMES</li>
+            <li data-link="webs">WEBS</li>
+            <li data-link="contact">CONTACT</li>
+        </ul>
+        <button id="theme">CHANGE</button>
+    </nav>
+    <div class="nav-banner">
+    </div>
+    <div class="card-container">
+        <div class="card" id="hello">
+            <div class="home-wrapper">
+                <div class="info-wrapper">
+                    <div class="info-row">
+                        <span>HI</span>
+                        <span>I'M</span>
+                        <span>JAN</span>
+                    </div>
+                    <div class="info-row">
+                        <span>KRAMPLA</span>
+                    </div>
+                    <div class="info-row">
+                        <span>Game & Frontend developer</span>
+                    </div>
+                </div>
+                <div class="photo-slider">
+                    <div class="photo-wrapper">
+                        <div class="photos">
+                            <img src="./images/S.jpg" alt="">
+                            <img src="./images/SZ.jpg" alt="">
+                            <img src="./images/Z.jpg" alt="">
+                            <img src="./images/JZ.jpg" alt="">
+                            <img src="./images/J.jpg" alt="">
+                            <img src="./images/JV.jpg" alt="">
+                            <img src="./images/V.jpg" alt="">
+                            <img src="./images/SV.jpg" alt="">
+                            <img src="./images/S.jpg" alt="">
+                        </div>
+                    </div>
+                    <input id="photo-range" type="range" min="0" max="8" value="4" autocomplete="off">
+                </div>
+            </div>
+        </div>
+        <div class="card" id="about">
+            <div class="about-wrapper">
+                <p>I've began my game development journey in 2016. Over the last <span id="year"></span> years I've worked on a ton of prototypes from roguelikes to large-scale metroidvanias. Few of those turned into full releases which you can check out on this <a href="#games" data-link="games">page</a>. <br><br> While learning about the web, I found some similarities between that and game development. I think it's interesting how you can communicate with and guide users/players through visual feedback.<br><br><a href="#contact" data-link="contact">Get in touch</a></p>
+            </div>
+        </div>
+        <div class="card" id="games">
+            <div class="game-container">
+                <div class="cr-container">
+                    <div class="cr-slide-wrap">
+                        <div class="cr-slide-wrap-inner">
+                        <div class="cr-slide">
+                            <img src="./images/bobthefrog1.png" alt="">
+                        </div>
+                        <div class="cr-slide">
+                            <img src="./images/bobthefrog2.png" alt="">
+                        </div>
+                        <div class="cr-slide">
+                            <img src="./images/bobthefrog3.png" alt="">
+                        </div>
+                        <div class="cr-slide">
+                            <img src="./images/bobthefrog4.png" alt="">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="cr-controls">
+                        <button class="prev cr-btn"></button>
+                        <div class="cr-dots"></div>
+                        <button class="next cr-btn"></button>
+                    </div>
+                </div>
+                <div class="game-info-container">
+                    <h3>BOB THE FROG</h3>
+                    <span>Arcade game where flowers are weapons and points! Make the best of 7 unique flowers to beat growing army of flies.</span>
+                    <a href="https://miloush.itch.io/bob-the-frog" target="_blank">DOWNLOAD</a>
+                </div>
+            </div>
+            <div class="game-container">
+                <div class="cr-container">
+                    <div class="cr-slide-wrap">
+                        <div class="cr-slide-wrap-inner">
+                        <div class="cr-slide">
+                            <img src="./images/telephones2.png" alt="">
+                        </div>
+                        <div class="cr-slide">
+                            <img src="./images/telephones1.png" alt="">
+                        </div>
+                        <div class="cr-slide">
+                            <img src="./images/telephones3.png" alt="">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="cr-controls">
+                        <button class="prev cr-btn"></button>
+                        <div class="cr-dots"></div>
+                        <button class="next cr-btn"></button>
+                    </div>
+                </div>
+                <div class="game-info-container">
+                    <h3>99 TELEPHONES</h3>
+                    <span>A quick arcade game where you connect friends to telephones while trying to avoid other lines</span>
+                    <a href="https://miloush.itch.io/99-telephones" target="_blank">DOWNLOAD</a>
+                </div>
+            </div>
+        </div>
+        <div class="card" id="webs">
+            <div class="cards-content">
+                <span>WEBS<br>CONTENT</span>
+            </div>
+        </div>
+        <div class="card" id="contact">
+            <div class="cards-content">
+                <span>CONTACT<br>CONTENT</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

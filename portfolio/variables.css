@@ -1,0 +1,35 @@
+:root {
+    --black: #070709;
+    --white: #FFFF;
+    --gray: rgb(82, 87, 93);
+    --accent: #2c8ff2;
+
+    --nav-width: 220px;
+
+    --carousel-width: 420px;
+    --carousel-height: 300px;
+}
+
+:root.light {
+    --white: #070709;
+    --black: #eeeeee;
+    --gray: darkgray;
+}
+
+@property --len {
+    initial-value: 100%;
+    inherits: false;
+    syntax: '<percentage>';
+}
+
+@property --glen {
+    initial-value: 100%;
+    inherits: false;
+    syntax: '<percentage>';
+}
+
+@property --rlen {
+    initial-value: 0%;
+    inherits: false;
+    syntax: '<percentage>';
+}
