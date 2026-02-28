@@ -1,5 +1,6 @@
 body {
     background-color: var(--black);
+    transition: background-color ease-in 0.1s;
     position: relative;
     overflow-x: hidden;
     padding-left: var(--nav-width);
@@ -20,6 +21,7 @@ nav {
     width: var(--nav-width);
     background-color: var(--black);
     border-right: 2px solid var(--gray);
+    transition: border-right ease-in 0.1s;
     z-index: 10;
 
     .coin {
@@ -44,6 +46,7 @@ nav {
             height: 12px;
             transform: translate(-50%, -50%);
             border: 2px solid var(--white);
+            transition: all ease-in 0.2s;
         }
 
         &:after {
@@ -94,6 +97,19 @@ nav {
             }
         }
     }
+
+    .theme {
+        height: 24px;
+        width: 24px;
+        margin-left: 32px;
+        margin-top: 16px;
+        background-image: url(./images/lightmode.svg);
+        background-size: contain;
+
+        &.dark {
+            background-image: url(./images/darkmode.svg);
+        }
+    }
 }
 
 .nav-banner {
@@ -114,7 +130,7 @@ nav {
         text-align: center;
         background-color: var(--gray);
         color: var(--black);
-        transition: transform ease-out 0.1s;
+        transition: transform ease-out 0.1s, background-color ease-in 0.2s, color ease-in 0.2s;
 
         &.active {
             transform: translateX(0px);
@@ -241,6 +257,7 @@ nav {
                 background: var(--white);
                 border-radius: 1px;
                 border: 4px solid var(--black);
+                transition: border ease-in 0.1s;
                 width: 8px;
                 height: 18px;
             }
@@ -272,7 +289,7 @@ nav {
                 top: 0;
                 bottom: 0;
                 display: flex;
-                width: calc(4 * var(--carousel-width));
+                width: calc(5 * var(--carousel-width));
                 transition: left ease-in 0.2s;
                 
                 .cr-slide {
@@ -303,6 +320,7 @@ nav {
                 border: none;
                 cursor: pointer;
                 background-color: var(--black);
+                transition: background-color ease-in 0.1s;
                 display: none;
             }
             
@@ -320,6 +338,7 @@ nav {
                     transform: translate(-100%, -50%) rotate(45deg);
                     border-top: 3px solid var(--gray);
                     border-right: 3px solid var(--gray);
+                    transition: border-top ease-in 0.1s, border-right ease-in 0.1s;
                 }
             }
             
@@ -337,6 +356,7 @@ nav {
                     transform: translateY(-50%) rotate(225deg);
                     border-top: 3px solid var(--gray);
                     border-right: 3px solid var(--gray);
+                    transition: border-top ease-in 0.1s, border-right ease-in 0.1s;
                 }
             }
 
@@ -349,7 +369,7 @@ nav {
                     cursor: pointer;
                     width: 48px;
                     height: 48px;
-                    background-image: linear-gradient(0deg, var(--black) var(--glen), var(--gray) 100%);
+                    background-image: linear-gradient(0deg, transparent var(--glen), var(--gray) 100%);
                     transition: --glen ease-out 0.1s, color ease-in 0.1s;
                     
                     &:before {
@@ -415,14 +435,30 @@ nav {
             color: var(--accent);
             padding: 8px;
             border: 2px solid var(--accent);
-            background-image: radial-gradient(var(--accent) 0%, var(--black) var(--rlen));
-            transition: --rlen ease-out 0.2s, color ease-in 0.2s;
             
             &:hover {
-                --rlen: 300%;
                 color: var(--black);
+                background-color: var(--accent);
             }
         }
+    }
+}
+
+.samurai {
+    margin: 64px;
+    height: 32px;
+    width: 64px;
+    margin-left: 0px;
+    background-image: url(./images/samurai3.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: margin-left ease-out 0.05s;
+    cursor: pointer;
+
+
+    &:hover {
+        background-image: url(./images/samurai4.png);
+        margin-left: 32px;
     }
 }
 
@@ -469,7 +505,7 @@ nav {
         width: 100vw;
         height: 100vh;
         opacity: 0.7;
-        background-color: var(--black);
+        background-color: #070709;
         animation: overlay-fade-in 0.25s ease-in forwards;
     }
 
@@ -510,8 +546,6 @@ nav {
 
 .about-wrapper {
     padding-top: 96px;
-    
-
     p {
         white-space: pre-wrap;
         max-width: 674px;

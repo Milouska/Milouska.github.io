@@ -13,7 +13,7 @@
 :root.light {
     --white: #070709;
     --black: #eeeeee;
-    --gray: darkgray;
+    --gray: rgb(123, 128, 132);
 }
 
 @property --len {
@@ -24,12 +24,6 @@
 
 @property --glen {
     initial-value: 100%;
-    inherits: false;
-    syntax: '<percentage>';
-}
-
-@property --rlen {
-    initial-value: 0%;
     inherits: false;
     syntax: '<percentage>';
 }

@@ -232,6 +232,7 @@ if (window.location.hash) {
 const lightBtn = document.querySelector("#theme");
 lightBtn.addEventListener("click", () => {
     document.documentElement.classList.toggle("light");
+    lightBtn.classList.toggle("dark");
 });
 
 //SHOW IMAGE FROM CAROUSEL
