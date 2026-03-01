@@ -2,7 +2,12 @@ const photoSlider = document.querySelector("#photo-range");
 const photoWrapper = document.querySelector(".photos");
 
 photoSlider.addEventListener("input", (event) => {
-    photoWrapper.style.left = `${event.target.value * -405}px`;
+    const homeWidthRaw = window.getComputedStyle(document.body)
+        .getPropertyValue("--home-width");
+    const homeWidth = Number(homeWidthRaw.substring(0, homeWidthRaw.length - 2));
+
+    console.log(homeWidth);
+    photoWrapper.style.left = `${event.target.value * -homeWidth}px`;
 })
 
 //NAV BAR CLICK
@@ -86,6 +91,8 @@ function changePage(pageName) {
                 void card.offsetWidth; 
 
                 card.classList.add("slide-in");
+
+                updateWidth();
             }, 100);
         }
     });
@@ -121,6 +128,9 @@ function updateBanner(text) {
 
 
 //GAME CONTAINER CAROUSELS
+window.addEventListener('resize', () => {
+    updateWidth();
+})
 
 const containers = document.querySelectorAll(".cr-container");
 
@@ -150,10 +160,6 @@ for (const container of containers) {
             slide.style.width = `${width}px`
         }
     }
-
-    window.addEventListener('resize', () => {
-        updateWidth();
-    })
 
     //Amount of slides in carousel
     const slideAmount = wrapInner.children.length;
@@ -277,14 +283,6 @@ for (const image of myImages) {
 const year = document.querySelector("#year");
 year.textContent = new Date().getFullYear() - 2016;
 
-//AFTER LOADING EVERYTHING - PUT DISPLAY NONE TO NONVISIBLE CARDS
-//SO THE VIEWER CANNOT PRESS LINKS AND STUFF
-pageCards.forEach((card, index) => {
-    if (index !== 0) {
-        card.style.display = "none";
-    }
-});
-
 //helper functions
 function stopScroll() {
     document.body.style.overflow = "hidden";
@@ -293,3 +291,15 @@ function stopScroll() {
 function startScroll() {
     document.body.style.removeProperty("overflow")
 }
+
+//AFTER LOADING EVERYTHING - PUT DISPLAY NONE TO NONVISIBLE CARDS
+//SO THE VIEWER CANNOT PRESS LINKS AND STUFF
+document.addEventListener("DOMContentLoaded", () => {
+    pageCards.forEach((card, index) => {
+        if (index !== 0) {
+            card.style.display = "none";
+        }
+    });
+
+    updateWidth();
+})
