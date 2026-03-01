@@ -2,7 +2,7 @@ const photoSlider = document.querySelector("#photo-range");
 const photoWrapper = document.querySelector(".photos");
 
 photoSlider.addEventListener("input", (event) => {
-    photoWrapper.style.left = `${event.target.value * -240}px`;
+    photoWrapper.style.left = `${event.target.value * -405}px`;
 })
 
 //NAV BAR CLICK

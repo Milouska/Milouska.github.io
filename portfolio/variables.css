@@ -4,6 +4,8 @@
     --gray: rgb(82, 87, 93);
     --accent: #2c8ff2;
 
+    --home-width: 405px;
+
     --nav-width: 220px;
 
     --carousel-width: 420px;
@@ -13,7 +15,6 @@
 :root.light {
     --white: #070709;
     --black: #eeeeee;
-    --gray: rgb(123, 128, 132);
 }
 
 @property --len {
