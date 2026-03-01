@@ -407,7 +407,6 @@ nav {
     .game-info-container {
         display: flex;
         flex-direction: column;
-        gap: 18px;
         width: 380px;
 
         h3 {
@@ -423,6 +422,7 @@ nav {
             color: var(--gray);
             font-size: 20px;
             line-height: 26px;
+            padding-bottom: 16px;
         }
 
         a {
@@ -448,17 +448,34 @@ nav {
     margin: 64px;
     height: 32px;
     width: 64px;
-    margin-left: 0px;
-    background-image: url(./images/samurai3.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    transition: margin-left ease-out 0.05s;
     cursor: pointer;
+    position: relative;
 
+    &:before {
+        position: absolute;
+        content: "";
+        display: block;
+        left: 0;
+        top: 0;
+        height: 32px;
+        width: 64px;
+        background-image: url(./images/samurai3.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        transition: left ease-out 0.1s;
+    }
 
     &:hover {
-        background-image: url(./images/samurai4.png);
-        margin-left: 32px;
+        &:before {
+            background-image: url(./images/samurai4.png);
+            left: 24px;
+        }
+    }
+
+    a {
+        display: block;
+        height: 100%;
+        width: 100%;
     }
 }
 
