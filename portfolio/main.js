@@ -300,30 +300,73 @@ const colorGray = window.getComputedStyle(document.body)
 let offsetX, offsetY;
 
 const tickets = [];
+const ticketCount = 8;
 
-for (let i = 0; i < 8; i++) {
+for (let i = 0; i < ticketCount; i++) {
     const ticket = document.createElement("div");
 
     ticket.addEventListener("mousedown", (e) => {
-        ticket.classList.add("drag");
-        ticket.style.transform = "translateY(32px) rotate(-15deg)";
-        ticket.style.border = "2px solid " + `${colorGray}`;
+        if (!ticket.classList.contains("fall")) {
+            ticket.classList.add("drag");
+            ticket.style.transform = "translateY(48px) rotate(-15deg)";
+            ticket.style.borderRight = "2px dashed " + `${colorGray}`;
+            ticket.style.zIndex = "10";
+            //ticket.style.border = "2px solid " + `${colorGray}`;
+            const prevElement = ticket.previousElementSibling;
 
-        //calculate offset inside element
-        offsetY = e.clientY - ticket.offsetTop;
-        offsetX = e.clientX - ticket.offsetLeft;
-    });
+            if (prevElement.classList.contains("mail-ticket")) {
+                prevElement.style.borderRight = "2px dashed " + `${colorGray}`;
+            }
 
-    ticket.addEventListener("mouseup", () => {
-        ticket.classList.remove("drag");
+            //calculate offset inside element
+            offsetY = e.clientY - ticket.offsetTop;
+            offsetX = e.clientX - ticket.offsetLeft;
+
+            //copy to clipboard
+            if (ticket.classList.contains("tel")) {
+                const telefon = ['(+420) ', '732 ', '254 ', '277'].join('');
+                navigator.clipboard.writeText(telefon);
+            } else {
+                const mail = ['masinkahu', '@', 'gmail.', 'com'].join('');
+                navigator.clipboard.writeText(mail);
+            }
+        }
     });
 
     ticket.classList.add("mail-ticket");
     ticket.style.left = i * (mailWrapper.offsetWidth / 8) + "px";
 
+    const ticketText = document.createElement("span");
+
+    if (i < 4) {
+        ticket.classList.add("mail");
+        ticketText.textContent = "MAIL";
+    } else {
+        ticket.classList.add("tel");
+        ticketText.textContent = "TEL.";
+    }
+    if (i == ticketCount-1) {
+        ticket.style.borderRight = "2px dashed " + `${colorGray}`;
+    }
+
+    ticket.appendChild(ticketText);
     mailWrapper.appendChild(ticket);
     tickets.push(ticket);
 }
+
+document.addEventListener("mouseup", () => {
+    tickets.forEach((ticket, index) => {
+        if (ticket.classList.contains("drag")) {
+            ticket.classList.remove("drag");
+            ticket.classList.add("fall");
+            ticket.style.transform = "translateY(120vh) rotate(35deg)";
+
+            ticket.addEventListener("transitionend", () => {
+                ticket.remove();
+            }, { once: true });
+        }
+    })
+});
 
 document.addEventListener("mousemove", (e) => {
     tickets.forEach((ticket, index) => {
