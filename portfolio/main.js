@@ -297,7 +297,8 @@ const mailWrapper = document.querySelector(".mail-wrapper");
 const colorGray = window.getComputedStyle(document.body)
         .getPropertyValue("--gray");
 
-let offsetX, offsetY;
+let offsetX = 0;
+let offsetY = 0;
 
 const tickets = [];
 const ticketCount = 8;
@@ -309,14 +310,7 @@ for (let i = 0; i < ticketCount; i++) {
         if (!ticket.classList.contains("fall")) {
             ticket.classList.add("drag");
             ticket.style.transform = "translateY(48px) rotate(-15deg)";
-            ticket.style.borderRight = "2px dashed " + `${colorGray}`;
             ticket.style.zIndex = "10";
-            //ticket.style.border = "2px solid " + `${colorGray}`;
-            const prevElement = ticket.previousElementSibling;
-
-            if (prevElement.classList.contains("mail-ticket")) {
-                prevElement.style.borderRight = "2px dashed " + `${colorGray}`;
-            }
 
             //calculate offset inside element
             offsetY = e.clientY - ticket.offsetTop;
@@ -334,7 +328,13 @@ for (let i = 0; i < ticketCount; i++) {
     });
 
     ticket.classList.add("mail-ticket");
-    ticket.style.left = i * (mailWrapper.offsetWidth / 8) + "px";
+    let leftOffset = i * (mailWrapper.offsetWidth / 8);
+
+    if (i === ticketCount-1) {
+        leftOffset -= 2;
+    }
+
+    ticket.style.left = leftOffset + "px";
 
     const ticketText = document.createElement("span");
 
@@ -345,9 +345,6 @@ for (let i = 0; i < ticketCount; i++) {
         ticket.classList.add("tel");
         ticketText.textContent = "TEL.";
     }
-    if (i == ticketCount-1) {
-        ticket.style.borderRight = "2px dashed " + `${colorGray}`;
-    }
 
     ticket.appendChild(ticketText);
     mailWrapper.appendChild(ticket);
@@ -355,7 +352,7 @@ for (let i = 0; i < ticketCount; i++) {
 }
 
 document.addEventListener("mouseup", () => {
-    tickets.forEach((ticket, index) => {
+    tickets.forEach((ticket) => {
         if (ticket.classList.contains("drag")) {
             ticket.classList.remove("drag");
             ticket.classList.add("fall");
@@ -369,7 +366,7 @@ document.addEventListener("mouseup", () => {
 });
 
 document.addEventListener("mousemove", (e) => {
-    tickets.forEach((ticket, index) => {
+    tickets.forEach((ticket) => {
         if (ticket.classList.contains("drag")) {
             ticket.style.left = e.clientX - offsetX + "px";
             ticket.style.top = e.clientY - offsetY + "px";

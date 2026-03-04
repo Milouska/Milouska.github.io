@@ -5,6 +5,11 @@ body {
     overflow-x: hidden;
     padding-left: var(--nav-width);
     font-family: "Roboto";
+    
+    &:has(.card.slide-in .contact-wrapper) {
+        height: 100vh;
+        overflow: hidden;
+    }
 
     .card-container {
         position: relative;
@@ -599,7 +604,7 @@ nav {
             color: var(--gray);
 
             &:last-child {
-                padding-top: 150px;
+                padding-top: 100px;
             }
         }
 
@@ -624,8 +629,9 @@ nav {
             position: absolute;
             top: 0;
             height: 124px;
-            width: calc(100% / 8);
+            width: calc(100% / 8 + 2px);
             border-left: 2px dashed var(--gray);
+            border-right: 2px dashed var(--gray);
             border-bottom: 2px dashed var(--gray);
             cursor: grab;
             transform: rotate(0);
@@ -656,6 +662,10 @@ nav {
 
             &.fall {
                 transition: transform 0.8s ease-in;
+            }
+
+            * {
+                pointer-events: none;
             }
 
             span {
