@@ -571,3 +571,71 @@ nav {
         }
     }
 }
+
+.contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+
+    .sites-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 32px;
+        height: 256px;
+        border-left: 2px solid var(--gray);
+        border-right: 2px solid var(--gray);
+
+        span {
+            font-size: 24px;
+            color: var(--gray);
+
+            &:last-child {
+                padding-top: 164px;
+            }
+        }
+
+        ul {
+            display: flex;
+            gap: 24px;
+            li {
+                svg {
+                    height: 32px;
+                    width: 32px;
+                }
+            }
+        }
+    }
+
+    .mail-wrapper {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+
+        .mail-ticket {
+            position: absolute;
+            top: 0;
+            height: 124px;
+            width: calc(100% / 8);
+            border-left: 1px dashed var(--gray);
+            border-right: 1px dashed var(--gray);
+            border-bottom: 2px solid var(--gray);
+            cursor: grab;
+            transform: rotate(0);
+            transform-origin: top left;
+            transition: transform linear 0.06s;
+        }
+
+        .mail-ticket:first-child {
+            border-left: 2px solid var(--gray);
+        }
+
+        .mail-ticket:last-child {
+            border-right: 2px solid var(--gray);
+        }
+
+        .drag {
+            cursor: grabbing;
+        }
+    }
+}

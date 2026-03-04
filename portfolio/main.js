@@ -292,6 +292,48 @@ function startScroll() {
     document.body.style.removeProperty("overflow")
 }
 
+//POPULATE CONTACTS WITH MAIL TICKETS
+const mailWrapper = document.querySelector(".mail-wrapper");
+const colorGray = window.getComputedStyle(document.body)
+        .getPropertyValue("--gray");
+
+let offsetX, offsetY;
+
+const tickets = [];
+
+for (let i = 0; i < 8; i++) {
+    const ticket = document.createElement("div");
+
+    ticket.addEventListener("mousedown", (e) => {
+        ticket.classList.add("drag");
+        ticket.style.transform = "translateY(32px) rotate(-15deg)";
+        ticket.style.border = "2px solid " + `${colorGray}`;
+
+        //calculate offset inside element
+        offsetY = e.clientY - ticket.offsetTop;
+        offsetX = e.clientX - ticket.offsetLeft;
+    });
+
+    ticket.addEventListener("mouseup", () => {
+        ticket.classList.remove("drag");
+    });
+
+    ticket.classList.add("mail-ticket");
+    ticket.style.left = i * (mailWrapper.offsetWidth / 8) + "px";
+
+    mailWrapper.appendChild(ticket);
+    tickets.push(ticket);
+}
+
+document.addEventListener("mousemove", (e) => {
+    tickets.forEach((ticket, index) => {
+        if (ticket.classList.contains("drag")) {
+            ticket.style.left = e.clientX - offsetX + "px";
+            ticket.style.top = e.clientY - offsetY + "px";
+        }
+    })
+});
+
 //AFTER LOADING EVERYTHING - PUT DISPLAY NONE TO NONVISIBLE CARDS
 //SO THE VIEWER CANNOT PRESS LINKS AND STUFF
 document.addEventListener("DOMContentLoaded", () => {
