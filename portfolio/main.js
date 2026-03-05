@@ -114,7 +114,7 @@ function updateBanner(text) {
     for (let i = 0; i < text.length; i++) {
         const newLetter = document.createElement("span");
         newLetter.innerHTML = text.charAt(i);
-        newLetter.style.top = `${i * 128}px`;
+        newLetter.style.top = `${i * 112}px`;
         
         navBanner.appendChild(newLetter);
 
@@ -303,6 +303,13 @@ let offsetY = 0;
 const tickets = [];
 const ticketCount = 8;
 
+function deleteToast(toast) {
+    toast.classList.add("toast-out");
+    toast.addEventListener("animationend", () => {
+        toast.remove();
+    });
+}
+
 for (let i = 0; i < ticketCount; i++) {
     const ticket = document.createElement("div");
 
@@ -324,6 +331,22 @@ for (let i = 0; i < ticketCount; i++) {
                 const mail = ['masinkahu', '@', 'gmail.', 'com'].join('');
                 navigator.clipboard.writeText(mail);
             }
+
+            //create toast
+            const existingToasts = document.querySelectorAll(".toast");
+            existingToasts.forEach(deleteToast);
+
+            const toast = document.createElement("span");
+            toast.classList.add("toast");
+            toast.textContent = "COPIED TO CLIPBOARD";
+            toast.style.top = ticket.getBoundingClientRect().top + "px";
+            toast.style.left = ticket.offsetLeft + ticket.offsetWidth/2 + "px";
+
+            setTimeout(() => {
+                deleteToast(toast);
+            }, 1000);
+
+            mailWrapper.appendChild(toast);
         }
     });
 

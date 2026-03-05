@@ -4,7 +4,8 @@ body {
     position: relative;
     overflow-x: hidden;
     padding-left: var(--nav-width);
-    font-family: "Roboto";
+    font-family: "Inter";
+    font-size: 62.5%;
     
     &:has(.card.slide-in .contact-wrapper) {
         height: 100vh;
@@ -88,8 +89,8 @@ nav {
         li {
             cursor: pointer;
             color: var(--white);
-            font-family: "Roboto";
-            font-size: 32px;
+            font-family: "Inter";
+            font-size: 2rem;
             line-height: 64px;
             padding-left: 32px;
             background-image: linear-gradient(90deg, var(--black) var(--len), var(--gray) 100%);
@@ -132,9 +133,9 @@ nav {
         position: absolute;
         width: 120px;
         transform: translateX(-120px);
-        font-family: "Roboto";
+        font-family: "Inter";
         font-weight: 800;
-        font-size: 128px;
+        font-size: 7rem;
         text-transform: uppercase;
         text-align: center;
         background-color: var(--gray);
@@ -405,25 +406,25 @@ nav {
         width: 380px;
 
         h3 {
-            font-family: "Roboto";
+            font-family: "Inter";
             font-weight: 800;
             color: var(--white);
-            font-size: 48px;
+            font-size: 2.5rem;
         }
 
         span {
-            font-family: "Roboto";
+            font-family: "Inter";
             font-weight: 500;
             color: var(--gray);
-            font-size: 20px;
+            font-size: 1rem;
             line-height: 26px;
             padding-bottom: 16px;
         }
 
         a {
-            font-family: "Roboto";
+            width: fit-content;
+            font-family: "Inter";
             font-weight: 500;
-            width: 100px;
             text-align: center;
             justify-items: center;
             text-decoration: none;
@@ -557,13 +558,46 @@ nav {
     to { opacity: 0; }
 }
 
-.about-wrapper {
+.toast {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+
+    position: fixed;
+    font-family: "Inter";
+    font-size: 1rem;
+    font-weight: 600;
+    width: fit-content;
+    padding: 8px;
+    background-color: var(--black);
+    color: var(--accent);
+    border: 2px solid var(--gray);
+    animation: pop-in 0.2s ease-out forwards;
+    z-index: 15;
+
+    &.toast-out {
+        animation: pop-out 0.2s ease-out forwards;
+    }
+}
+
+@keyframes pop-in {
+    from { transform: translateY(0px) scale(0); }
+    to { transform: translateY(-48px) scale(1); }
+}
+
+@keyframes pop-out {
+    from {  transform: translateY(-48px) scale(1); }
+    to {  transform: translateY(-64px) scale(0); }
+}
+
+.about-wrapper,
+.webs-wrapper {
     padding-top: 96px;
     p {
         white-space: pre-wrap;
         max-width: 674px;
         color: var(--white);
-        font-size: 32px;
+        font-size: 2rem;
         line-height: 48px;
 
         a {
@@ -590,18 +624,20 @@ nav {
         display: flex;
         flex-direction: column;
         gap: 12px;
-        padding: 32px;
+        padding: 16px;
         height: 256px;
         border-left: 2px solid var(--gray);
         border-right: 2px solid var(--gray);
+        background-color: var(--contact-color);
+        transition: background-color ease-in 0.1s;
 
         span {
             -webkit-user-select: none; /* Safari */
             -ms-user-select: none; /* IE 10 and IE 11 */
             user-select: none; /* Standard syntax */
 
-            font-size: 24px;
-            color: var(--gray);
+            font-size: 1.5rem;
+            color: var(--white);
 
             &:last-child {
                 padding-top: 100px;
@@ -636,7 +672,7 @@ nav {
             cursor: grab;
             transform: rotate(0);
             transform-origin: top left;
-            background-color: var(--black);
+            background-color: var(--contact-color);
             transition: transform linear 0.06s, background-color ease-in 0.1s;
             display: flex;
             justify-content: center;
@@ -673,7 +709,7 @@ nav {
                 -ms-user-select: none; /* IE 10 and IE 11 */
                 user-select: none; /* Standard syntax */
 
-                font-size: 16px;
+                font-size: 1rem;
                 color: var(--gray);
                 padding-bottom: 8px;
             }

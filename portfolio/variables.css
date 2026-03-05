@@ -3,6 +3,7 @@
     --white: #FFFF;
     --gray: rgb(82, 87, 93);
     --accent: #2c8ff2;
+    --contact-color: rgb(10, 17, 25);
 
     --home-width: 380px;
 
@@ -15,6 +16,8 @@
 :root.light {
     --white: #070709;
     --black: #eeeeee;
+
+    --contact-color: #b3b9c1;
 }
 
 @property --len {
