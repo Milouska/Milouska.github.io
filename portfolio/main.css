@@ -83,6 +83,10 @@ nav {
                 background-color: var(--black);
             }
         }
+
+        .hamburger {
+            position: fixed;
+        }
     }
 
     ul {
