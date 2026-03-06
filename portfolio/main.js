@@ -176,8 +176,6 @@ function updateBanner(text) {
 //GAME CONTAINER CAROUSELS
 window.addEventListener('resize', () => {
     updateWidth();
-    navBanner.innerHTML = "";
-    updateBanner(prevLinkName);
 })
 
 const containers = document.querySelectorAll(".cr-container");
