@@ -1,6 +1,23 @@
 @media screen and (max-width: 720px) {
+    :root {
+        --nav-banner-size: 60px;
+        --nav-banner-font-size: 3.5rem;
+        --nav-width: 180px;
+
+        --home-width: 240px;
+        --home-height: 340px;
+    }
     nav {
         .nav-wrapper {
+            .coin {
+                margin-left: 16px;
+            }
+
+            ul {
+                li {
+                    padding-left: 16px;
+                }
+            }
             .hamburger {
                 display: block;
             }

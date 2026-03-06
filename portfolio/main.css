@@ -6,6 +6,7 @@ body {
     padding-left: var(--nav-width);
     font-family: "Inter";
     font-size: 62.5%;
+    transition: padding-left ease-in 0.2s;
     
     &:has(.card.slide-in .contact-wrapper) {
         height: 100vh;
@@ -119,7 +120,7 @@ nav {
         .hamburger {
             display: none;
             position: fixed;
-            left: 128px;
+            left: 96px;
             top: 16px;
             width: 36px;
             height: 32px;
@@ -187,11 +188,12 @@ nav {
             user-select: none; /* Standard syntax */
 
             position: absolute;
-            width: 120px;
+            width: var(--nav-banner-size);
+            height: var(--nav-banner-size);
             transform: translateX(-120px);
             font-family: "Inter";
             font-weight: 800;
-            font-size: 7rem;
+            font-size: var(--nav-banner-font-size);
             text-transform: uppercase;
             text-align: center;
             background-color: var(--gray);
@@ -250,6 +252,7 @@ nav {
     flex-direction: column;
     gap: 16px;
     max-width: var(--home-width);
+    width: 100%;
     margin: auto;
     padding-top: 32px;
 
@@ -266,26 +269,28 @@ nav {
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: var(--home-width);
+        width: var(--home-width);
+        height: var(--home-height);
         margin-inline: auto;
         gap: 8px;
 
         .photo-wrapper {
-            overflow: hidden;
-            height: 540px;
             width: var(--home-width);
+            height: var(--home-height);
+            overflow: hidden;
             position: relative;
             
             .photos {
                 position: absolute;
                 top: 0;
                 left: calc(-4 * var(--home-width));
+                width: calc(9 * var(--home-width));
                 display: flex;
                 height: 100%;
                 
                 img {
                     display: block;
-                    width: var(--home-width);
+                    width: 100%;
                     object-fit: cover;
                     text-align: center;
                 }
@@ -293,7 +298,8 @@ nav {
         }
 
         input[type="range"] {
-            width: var(--home-width);
+            max-width: var(--home-width);
+            width: 100%;
             appearance: none;
             display: block;
             padding-top: 8px;

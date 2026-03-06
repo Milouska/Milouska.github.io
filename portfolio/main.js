@@ -6,9 +6,12 @@ photoSlider.addEventListener("input", (event) => {
         .getPropertyValue("--home-width");
     const homeWidth = Number(homeWidthRaw.substring(0, homeWidthRaw.length - 2));
 
-    console.log(homeWidth);
     photoWrapper.style.left = `${event.target.value * -homeWidth}px`;
-})
+});
+
+function isMobile() {
+    return window.outerWidth <= 728;
+}
 
 //HEMBUREGER CLICK
 const hamburger = document.querySelector(".hamburger");
@@ -25,7 +28,7 @@ function openNavBar() {
 }
 
 function toggleNavBar() {
-    if (window.outerWidth <= 728) {
+    if (isMobile()) {
         closeNavBar();
     } else {
         openNavBar();
@@ -139,7 +142,7 @@ function changePage(pageName) {
     // Change tab name
     document.title = `${capitalize(linkName)} - Jan Krampla`;
 
-    if (window.outerWidth <= 728) {
+    if (isMobile()) {
         closeNavBar()
     }
 }
@@ -151,8 +154,13 @@ function capitalize(text) {
 function updateBanner(text) {
     for (let i = 0; i < text.length; i++) {
         const newLetter = document.createElement("span");
+        const letterHeightRaw = window.getComputedStyle(document.body)
+        .getPropertyValue("--nav-banner-size");
+
+        const letterHeight = Number(letterHeightRaw.substring(0, letterHeightRaw.length - 2));
+    
         newLetter.innerHTML = text.charAt(i);
-        newLetter.style.top = `${i * 112}px`;
+        newLetter.style.top = `${i * letterHeight}px`;
         
         navBanner.appendChild(newLetter);
 
@@ -168,6 +176,8 @@ function updateBanner(text) {
 //GAME CONTAINER CAROUSELS
 window.addEventListener('resize', () => {
     updateWidth();
+    navBanner.innerHTML = "";
+    updateBanner(prevLinkName);
 })
 
 const containers = document.querySelectorAll(".cr-container");

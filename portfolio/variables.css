@@ -6,8 +6,11 @@
     --contact-color: rgb(10, 17, 25);
 
     --home-width: 380px;
+    --home-height: 540px;
 
     --nav-width: 220px;
+    --nav-banner-size: 120px;
+    --nav-banner-font-size: 7rem;
 
     --carousel-width: 420px;
     --carousel-height: 300px;
