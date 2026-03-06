@@ -22,132 +22,186 @@ body {
 nav {
     position: fixed;
     top: 0;
-    left: 0;
+    left: calc(var(--nav-width) * -1);
     bottom: 0;
     width: var(--nav-width);
-    background-color: var(--black);
     border-right: 2px solid var(--gray);
-    transition: border-right ease-in 0.1s;
-    z-index: 10;
+    transition: border-right ease-in 0.1s, left ease-in 0.2s;
+    z-index: 100;
 
-    .coin {
-        width: 48px;
-        height: 48px;
-        border: 2px solid var(--white);
-        border-radius: 50%;
-        margin-left: 32px;
-        margin-top: 16px;
-        margin-bottom: 16px;
-        position: relative;
-        transition: all ease-in 0.2s;
-        cursor: pointer;
+    &.nav-open {
+        left: 0px;
+    }
+    
+    .nav-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: var(--black);
+        z-index: 10;
 
-        &:before {
-            position: absolute;
-            content: "";
-            display: block;
-            top: 50%;
-            left: 50%;
-            width: 12px;
-            height: 12px;
-            transform: translate(-50%, -50%);
+        .coin {
+            width: 48px;
+            height: 48px;
             border: 2px solid var(--white);
+            border-radius: 50%;
+            margin-left: 32px;
+            margin-top: 16px;
+            margin-bottom: 16px;
+            position: relative;
             transition: all ease-in 0.2s;
-        }
-
-        &:after {
-            position: absolute;
-            content: "";
-            display: block;
-            top: 50%;
-            left: 50%;
-            width: 13px;
-            height: 13px;
-            opacity: 0;
-            transform: translate(-50%, -50%) rotate(45deg) scale(0);
-            border-left: 2px solid var(--black);
-            border-top: 2px solid var(--black);
-            transition: all ease-in 0.2s;
-        }
-
-        &.active,
-        &:hover {
-            background-color: var(--white);
-            &:after {
-                top: calc(50% - 3px);
-                opacity: 1;
-                transform: translate(-50%, -50%) rotate(45deg) scale(1);
-            }
+            cursor: pointer;
 
             &:before {
-                background-color: var(--black);
+                position: absolute;
+                content: "";
+                display: block;
+                top: 50%;
+                left: 50%;
+                width: 12px;
+                height: 12px;
+                transform: translate(-50%, -50%);
+                border: 2px solid var(--white);
+                transition: all ease-in 0.2s;
+            }
+
+            &:after {
+                position: absolute;
+                content: "";
+                display: block;
+                top: 50%;
+                left: 50%;
+                width: 13px;
+                height: 13px;
+                opacity: 0;
+                transform: translate(-50%, -50%) rotate(45deg) scale(0);
+                border-left: 2px solid var(--black);
+                border-top: 2px solid var(--black);
+                transition: all ease-in 0.2s;
+            }
+
+            &.active,
+            &:hover {
+                background-color: var(--white);
+                &:after {
+                    top: calc(50% - 3px);
+                    opacity: 1;
+                    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+                }
+
+                &:before {
+                    background-color: var(--black);
+                }
+            }
+        }
+
+        ul {
+            li {
+                cursor: pointer;
+                color: var(--white);
+                font-family: "Inter";
+                font-size: 2rem;
+                line-height: 64px;
+                padding-left: 32px;
+                background-image: linear-gradient(90deg, var(--black) var(--len), var(--gray) 100%);
+                transition: --len ease-out .15s, color ease-in 0.15s;
+                
+                &.active,
+                &:hover {
+                    --len: -50%;
+                    color: var(--black);
+                }
             }
         }
 
         .hamburger {
+            display: none;
             position: fixed;
-        }
-    }
-
-    ul {
-        li {
+            left: 128px;
+            top: 16px;
+            width: 36px;
+            height: 32px;
+            margin: 8px;
+            border-bottom: 2px solid var(--white);
+            border-top: 2px solid var(--white);
+            transition: all ease-in 0.2s;
             cursor: pointer;
-            color: var(--white);
-            font-family: "Inter";
-            font-size: 2rem;
-            line-height: 64px;
-            padding-left: 32px;
-            background-image: linear-gradient(90deg, var(--black) var(--len), var(--gray) 100%);
-            transition: --len ease-out .15s, color ease-in 0.15s;
-            
-            &.active,
-            &:hover {
-                --len: -50%;
-                color: var(--black);
+
+            &:before,
+            &:after {
+                position: absolute;
+                content: "";
+                display: block;
+                background-color: var(--white);
+                top: 50%;
+                left: 50%;
+                transform-origin: center;
+                transform: translate(-50%, -50%) rotate(0deg);
+                height: 2px;
+                width: 100%;
+                transition: transform ease-in 0.2s, width ease-in 0.2s;
+            }
+
+            &.nav-open {
+                border-color: transparent;
+                &:before {
+                    transform: translate(-50%, -50%) rotate(45deg);
+                    width: 141%;
+                }
+                &:after {
+                    transform: translate(-50%, -50%) rotate(-45deg);
+                    width: 141%;
+                }
+            }
+        }
+
+        .theme {
+            position: absolute;
+            bottom: 32px;
+            height: 24px;
+            width: 24px;
+            margin-left: 32px;
+            margin-top: 16px;
+            background-image: url(./images/lightmode.svg);
+            background-size: contain;
+
+            &.dark {
+                background-image: url(./images/darkmode.svg);
             }
         }
     }
 
-    .theme {
-        height: 24px;
-        width: 24px;
-        margin-left: 32px;
-        margin-top: 16px;
-        background-image: url(./images/lightmode.svg);
-        background-size: contain;
-
-        &.dark {
-            background-image: url(./images/darkmode.svg);
-        }
-    }
-}
-
-.nav-banner {
-    position: fixed;
-    top: 0;
-    left: var(--nav-width);
-    display: flex;
-    flex-direction: column;
-
-    span {
-        -webkit-user-select: none; /* Safari */
-        -ms-user-select: none; /* IE 10 and IE 11 */
-        user-select: none; /* Standard syntax */
-
+    .nav-banner {
         position: absolute;
-        width: 120px;
-        transform: translateX(-120px);
-        font-family: "Inter";
-        font-weight: 800;
-        font-size: 7rem;
-        text-transform: uppercase;
-        text-align: center;
-        background-color: var(--gray);
-        color: var(--black);
-        transition: transform ease-out 0.1s, background-color ease-in 0.2s, color ease-in 0.2s;
+        top: 0;
+        left: var(--nav-width);
+        display: flex;
+        flex-direction: column;
+        z-index: -5;
 
-        &.active {
-            transform: translateX(0px);
+        span {
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+
+            position: absolute;
+            width: 120px;
+            transform: translateX(-120px);
+            font-family: "Inter";
+            font-weight: 800;
+            font-size: 7rem;
+            text-transform: uppercase;
+            text-align: center;
+            background-color: var(--gray);
+            color: var(--black);
+            transition: transform ease-out 0.1s, background-color ease-in 0.2s, color ease-in 0.2s;
+            z-index: 0;
+
+            &.active {
+                transform: translateX(0px);
+            }
         }
     }
 }
@@ -428,7 +482,7 @@ nav {
         a {
             width: fit-content;
             font-family: "Inter";
-            font-weight: 500;
+            font-weight: 700;
             text-align: center;
             justify-items: center;
             text-decoration: none;

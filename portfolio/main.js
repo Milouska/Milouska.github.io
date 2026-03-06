@@ -10,6 +10,40 @@ photoSlider.addEventListener("input", (event) => {
     photoWrapper.style.left = `${event.target.value * -homeWidth}px`;
 })
 
+//HEMBUREGER CLICK
+const hamburger = document.querySelector(".hamburger");
+const navBar = document.querySelector("nav");
+
+function closeNavBar() {
+    hamburger.classList.remove("nav-open");
+    navBar.classList.remove("nav-open");
+}
+
+function openNavBar() {
+    hamburger.classList.add("nav-open");
+    navBar.classList.add("nav-open");
+}
+
+function toggleNavBar() {
+    if (window.outerWidth <= 728) {
+        closeNavBar();
+    } else {
+        openNavBar();
+    }
+}
+
+toggleNavBar()
+
+window.addEventListener("resize", toggleNavBar)
+
+hamburger.addEventListener("click", () => {
+    if (hamburger.classList.contains("nav-open")) {
+        closeNavBar();
+    } else {
+        openNavBar();
+    }
+});
+
 //NAV BAR CLICK
 const pageNavs = document.querySelectorAll("nav li");
 const navBanner = document.querySelector(".nav-banner");
@@ -104,6 +138,10 @@ function changePage(pageName) {
 
     // Change tab name
     document.title = `${capitalize(linkName)} - Jan Krampla`;
+
+    if (window.outerWidth <= 728) {
+        closeNavBar()
+    }
 }
 
 function capitalize(text) {
