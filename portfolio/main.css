@@ -298,7 +298,6 @@ nav {
     input[type="range"]::-webkit-slider-runnable-track {
         height: 2px;
         background-color: var(--white);
-        border: 12px solid var(--black);
     }
 
     input[type="range"]::-moz-range-track {
@@ -312,7 +311,6 @@ nav {
         -webkit-appearance: none;
         background: var(--white);
         border-radius: 1px;
-        border: 6px solid var(--black);
         width: 12px;
         height: 24px;
         margin-top: -11px;
