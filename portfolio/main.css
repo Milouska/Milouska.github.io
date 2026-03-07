@@ -294,20 +294,28 @@ nav {
 
         &::-webkit-slider-runnable-track,
         &::-moz-range-track {
+            -webkit-appearance: none;
             appearance: none;
             height: 2px;
             background-color: var(--white);
+            border: 12px solid var(--black);
+            cursor: pointer;
         }
-    
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
         &::-webkit-slider-thumb,
         &::-moz-range-thumb {
-            appearance: none;
             background: var(--white);
             border-radius: 1px;
             border: 6px solid var(--black);
             transition: border ease-in 0.1s;
             width: 12px;
             height: 24px;
+            cursor: pointer;
         }
     }
 }
