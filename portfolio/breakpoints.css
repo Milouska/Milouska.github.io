@@ -1,26 +1,109 @@
-/*
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 1200px) {
+    .game-container {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    .about-wrapper,
+    .webs-wrapper {
+        padding-top: 96px;
+        p {
+            font-size: 1rem;
+            line-height: 1.5rem;
+        }
+    }
+}
+
+@media screen and (max-width: 760px) {
     :root {
-        --nav-banner-size: 60px;
+        --nav-banner-size: 70px;
         --nav-banner-font-size: 3.5rem;
         --nav-width: 180px;
-
-        --home-width: 240px;
-        --home-height: 340px;
     }
+
+    body {
+        padding-left: 75px;
+    }
+
+    .home-wrapper {
+        gap: 8px;
+        padding-top: 16px;
+
+        input[type="range"] {
+            max-width: var(--home-width);
+            width: 100%;
+            appearance: none;
+            display: block;
+            padding-top: 4px;
+            background: transparent;
+
+            &::-webkit-slider-runnable-track,
+            &::-moz-range-track {
+                appearance: none;
+                height: 2px;
+                background-color: var(--white);
+            }
+        
+            &::-webkit-slider-thumb,
+            &::-moz-range-thumb {
+                appearance: none;
+                background: var(--white);
+                border-radius: 1px;
+                border: 4px solid var(--black);
+                transition: border ease-in 0.1s;
+                width: 8px;
+                height: 16px;
+            }
+        }
+    }
+
     nav {
         .nav-wrapper {
             .coin {
-                margin-left: 16px;
+                margin-top: 80px;
+                margin-left: 12px;
             }
 
             ul {
                 li {
-                    padding-left: 16px;
+                    padding-left: 12px;
                 }
             }
             .hamburger {
                 display: block;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 560px) {
+    :root {
+        --carousel-width: 210px;
+        --carousel-height: 150px;
+        --carousel-btn-size: 24px;
+        --carousel-dot-size: 7px;
+    }
+    .game-container {
+        padding-block: 24px;
+        gap: 24px;
+
+        .game-info-container {
+            width: 210px;
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            span {
+                font-size: 1rem;
+                line-height: 1.2rem;
+                padding-bottom: 8px;
+            }
+
+            a {
+                width: fit-content;
+
             }
         }
     }

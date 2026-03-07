@@ -3,7 +3,8 @@ body {
     transition: background-color ease-in 0.1s;
     position: relative;
     overflow-x: hidden;
-    padding-left: var(--nav-width);
+    padding-left: calc(var(--nav-width) + 130px);
+    padding-right: 5px;
     font-family: "Inter";
     font-size: 62.5%;
     transition: padding-left ease-in 0.2s;
@@ -120,11 +121,10 @@ nav {
         .hamburger {
             display: none;
             position: fixed;
-            left: 96px;
-            top: 16px;
-            width: 36px;
-            height: 32px;
-            margin: 8px;
+            left: 22px;
+            top: 22px;
+            width: 26px;
+            height: 22px;
             border-bottom: 2px solid var(--white);
             border-top: 2px solid var(--white);
             transition: all ease-in 0.2s;
@@ -195,7 +195,9 @@ nav {
             font-weight: 800;
             font-size: var(--nav-banner-font-size);
             text-transform: uppercase;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background-color: var(--gray);
             color: var(--black);
             transition: transform ease-out 0.1s, background-color ease-in 0.2s, color ease-in 0.2s;
@@ -253,6 +255,8 @@ nav {
     gap: 16px;
     max-width: var(--home-width);
     width: 100%;
+    max-height: calc(100vh - 32px);
+    min-height: 0;
     margin: auto;
     padding-top: 32px;
 
@@ -265,63 +269,46 @@ nav {
         }
     }
 
-    .photo-slider {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: var(--home-width);
-        height: var(--home-height);
+    .photo-wrapper {
+        max-width: var(--home-width);
+        max-height: var(--home-height);
+        height: 100%;
         margin-inline: auto;
-        gap: 8px;
 
-        .photo-wrapper {
-            width: var(--home-width);
-            height: var(--home-height);
-            overflow: hidden;
-            position: relative;
-            
-            .photos {
-                position: absolute;
-                top: 0;
-                left: calc(-4 * var(--home-width));
-                width: calc(9 * var(--home-width));
-                display: flex;
-                height: 100%;
-                
-                img {
-                    display: block;
-                    width: 100%;
-                    object-fit: cover;
-                    text-align: center;
-                }
-            }
-        }
 
-        input[type="range"] {
-            max-width: var(--home-width);
-            width: 100%;
-            appearance: none;
+        img {
             display: block;
-            padding-top: 8px;
-            background: transparent;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            text-align: center;
+        }
+    }
 
-            &::-webkit-slider-runnable-track,
-            &::-moz-range-track {
-                appearance: none;
-                height: 2px;
-                background-color: var(--white);
-            }
-        
-            &::-webkit-slider-thumb,
-            &::-moz-range-thumb {
-                appearance: none;
-                background: var(--white);
-                border-radius: 1px;
-                border: 6px solid var(--black);
-                transition: border ease-in 0.1s;
-                width: 12px;
-                height: 24px;
-            }
+    input[type="range"] {
+        max-width: var(--home-width);
+        width: 100%;
+        appearance: none;
+        display: block;
+        padding-top: 8px;
+        background: transparent;
+
+        &::-webkit-slider-runnable-track,
+        &::-moz-range-track {
+            appearance: none;
+            height: 2px;
+            background-color: var(--white);
+        }
+    
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
+            appearance: none;
+            background: var(--white);
+            border-radius: 1px;
+            border: 6px solid var(--black);
+            transition: border ease-in 0.1s;
+            width: 12px;
+            height: 24px;
         }
     }
 }
@@ -375,8 +362,8 @@ nav {
             justify-content: center;
             
             .cr-btn {
-                width: 32px;
-                height: 32px;
+                width: var(--carousel-btn-size);
+                height: var(--carousel-btn-size);
                 border: none;
                 cursor: pointer;
                 background-color: var(--black);
@@ -393,8 +380,8 @@ nav {
                     display: block;
                     top: 50%;
                     left: 50%;
-                    width: 10px;
-                    height: 10px;
+                    width: var(--carousel-dot-size);
+                    height: var(--carousel-dot-size);
                     transform: translate(-100%, -50%) rotate(45deg);
                     border-top: 3px solid var(--gray);
                     border-right: 3px solid var(--gray);
@@ -411,8 +398,8 @@ nav {
                     display: block;
                     top: 50%;
                     left: 50%;
-                    width: 10px;
-                    height: 10px;
+                    width: var(--carousel-dot-size);
+                    height: var(--carousel-dot-size);
                     transform: translateY(-50%) rotate(225deg);
                     border-top: 3px solid var(--gray);
                     border-right: 3px solid var(--gray);
@@ -427,8 +414,8 @@ nav {
                 .cr-dot {
                     position: relative;
                     cursor: pointer;
-                    width: 48px;
-                    height: 48px;
+                    width: var(--carousel-btn-size);
+                    height: var(--carousel-btn-size);
                     background-image: linear-gradient(0deg, transparent var(--glen), var(--gray) 100%);
                     transition: --glen ease-out 0.1s, color ease-in 0.1s;
                     
@@ -439,8 +426,8 @@ nav {
                         top: 50%;
                         left: 50%;
                         transform: translate(-50%, -50%);
-                        width: 14px;
-                        height: 14px;
+                        width: var(--carousel-dot-size);
+                        height: var(--carousel-dot-size);
                         border-radius: 50%;
                         background-color: var(--gray);
                         transition: background-color ease-in 0.2s;
@@ -660,6 +647,7 @@ nav {
     p {
         white-space: pre-wrap;
         max-width: 674px;
+        padding-inline: 16px;
         color: var(--white);
         font-size: 2rem;
         line-height: 48px;
@@ -721,15 +709,12 @@ nav {
     }
 
     .mail-wrapper {
-        display: flex;
-        justify-content: space-between;
         position: relative;
 
         .mail-ticket {
             position: absolute;
             top: 0;
             height: 124px;
-            width: calc(100% / 8 + 2px);
             border-left: 2px dashed var(--gray);
             border-right: 2px dashed var(--gray);
             border-bottom: 2px dashed var(--gray);

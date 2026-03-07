@@ -1,16 +1,26 @@
+//SETUP PHOTO SLIDER
 const photoSlider = document.querySelector("#photo-range");
-const photoWrapper = document.querySelector(".photos");
+const photoWrapper = document.querySelector(".photo-wrapper");
+const photos = photoWrapper.children;
+
+function activePhoto(index) {
+    for (let i = 0; i < photos.length; i++) {
+        photos[i].style.display = "none";
+        if (i == index) {
+            photos[i].style.display = "block";
+        }
+    }
+}
+
+activePhoto(4);
 
 photoSlider.addEventListener("input", (event) => {
-    const homeWidthRaw = window.getComputedStyle(document.body)
-        .getPropertyValue("--home-width");
-    const homeWidth = Number(homeWidthRaw.substring(0, homeWidthRaw.length - 2));
-
-    photoWrapper.style.left = `${event.target.value * -homeWidth}px`;
+    activePhoto(Number(event.target.value));
 });
 
+
 function isMobile() {
-    return window.outerWidth <= 728;
+    return window.outerWidth <= 760;
 }
 
 //HEMBUREGER CLICK
@@ -161,6 +171,10 @@ function updateBanner(text) {
     
         newLetter.innerHTML = text.charAt(i);
         newLetter.style.top = `${i * letterHeight}px`;
+
+        if (isMobile) {
+            newLetter.style.top = `${i * letterHeight + 64}px`;
+        }
         
         navBanner.appendChild(newLetter);
 
@@ -347,7 +361,9 @@ let offsetX = 0;
 let offsetY = 0;
 
 const tickets = [];
-const ticketCount = 8;
+let ticketCount = 8;
+
+if (isMobile) ticketCount = 4;
 
 function deleteToast(toast) {
     toast.classList.add("toast-out");
@@ -397,17 +413,14 @@ for (let i = 0; i < ticketCount; i++) {
     });
 
     ticket.classList.add("mail-ticket");
-    let leftOffset = i * (mailWrapper.offsetWidth / 8);
+    let leftOffset = i * (100 / ticketCount);
 
-    if (i === ticketCount-1) {
-        leftOffset -= 2;
-    }
-
-    ticket.style.left = leftOffset + "px";
+    ticket.style.left = leftOffset + "%";
+    ticket.style.width = 100 / ticketCount + "%";
 
     const ticketText = document.createElement("span");
 
-    if (i < 4) {
+    if (i < ticketCount / 2) {
         ticket.classList.add("mail");
         ticketText.textContent = "MAIL";
     } else {
