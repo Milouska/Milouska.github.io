@@ -172,7 +172,7 @@ function updateBanner(text) {
         newLetter.innerHTML = text.charAt(i);
         newLetter.style.top = `${i * letterHeight}px`;
 
-        if (isMobile) {
+        if (isMobile()) {
             newLetter.style.top = `${i * letterHeight + 64}px`;
         }
         
@@ -189,6 +189,7 @@ function updateBanner(text) {
 
 //GAME CONTAINER CAROUSELS
 window.addEventListener('resize', () => {
+    updateTickets();
     updateWidth();
 })
 
@@ -353,6 +354,13 @@ function startScroll() {
 }
 
 //POPULATE CONTACTS WITH MAIL TICKETS
+function deleteToast(toast) {
+    toast.classList.add("toast-out");
+    toast.addEventListener("animationend", () => {
+        toast.remove();
+    });
+}
+
 const mailWrapper = document.querySelector(".mail-wrapper");
 const colorGray = window.getComputedStyle(document.body)
         .getPropertyValue("--gray");
@@ -363,14 +371,7 @@ let offsetY = 0;
 const tickets = [];
 let ticketCount = 8;
 
-if (isMobile) ticketCount = 4;
-
-function deleteToast(toast) {
-    toast.classList.add("toast-out");
-    toast.addEventListener("animationend", () => {
-        toast.remove();
-    });
-}
+if (isMobile()) ticketCount = 4;
 
 for (let i = 0; i < ticketCount; i++) {
     const ticket = document.createElement("div");
