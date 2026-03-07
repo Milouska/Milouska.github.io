@@ -285,6 +285,8 @@ nav {
     }
 
     input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
         max-width: var(--home-width);
         width: 100%;
         appearance: none;
@@ -292,14 +294,17 @@ nav {
         padding-top: 8px;
         background: transparent;
 
-        &::-webkit-slider-runnable-track,
-        &::-moz-range-track {
+        &::-webkit-slider-runnable-track {
             -webkit-appearance: none;
-            appearance: none;
             height: 2px;
             background-color: var(--white);
             border: 12px solid var(--black);
-            cursor: pointer;
+        }
+
+        &::-moz-range-track {
+            height: 2px;
+            background-color: var(--white);
+            border: 12px solid var(--black);
         }
 
         &::-webkit-slider-thumb {
@@ -307,7 +312,16 @@ nav {
             appearance: none;
         }
 
-        &::-webkit-slider-thumb,
+        &::-webkit-slider-thumb {
+            background: var(--white);
+            border-radius: 1px;
+            border: 6px solid var(--black);
+            transition: border ease-in 0.1s;
+            width: 12px;
+            height: 24px;
+            cursor: pointer;
+        }
+
         &::-moz-range-thumb {
             background: var(--white);
             border-radius: 1px;
