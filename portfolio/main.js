@@ -166,10 +166,10 @@ function capitalize(text) {
 function updateBanner(text) {
     for (let i = 0; i < text.length; i++) {
         const newLetter = document.createElement("span");
-        const letterHeightRaw = window.getComputedStyle(document.body)
-        .getPropertyValue("--nav-banner-size");
-
-        const letterHeight = Number(letterHeightRaw.substring(0, letterHeightRaw.length - 2));
+        
+        const letterHeight = parseFloat(
+            getComputedStyle(document.body).getPropertyValue("--nav-banner-size")
+        ) || 32; // fallback
     
         newLetter.innerHTML = text.charAt(i);
         newLetter.style.top = `${i * letterHeight}px`;
@@ -212,7 +212,7 @@ window.addEventListener('resize', () => {
             changedToDesktop = false;
         }
         updateTickets(); //works kinda
-    }, 100); // adjust delay if needed
+    }, 50); // adjust delay if needed
 });
 
 const containers = document.querySelectorAll(".cr-container");
