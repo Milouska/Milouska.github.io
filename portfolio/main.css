@@ -707,6 +707,7 @@ nav {
 
             &:last-child {
                 padding-top: 100px;
+                padding-bottom: 24px;
             }
         }
 

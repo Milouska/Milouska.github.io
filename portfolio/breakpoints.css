@@ -48,6 +48,17 @@
             }
         }
     }
+
+    .game-container {
+        &:first-child {
+            padding-top: 64px;
+        }
+    }
+
+    .about-wrapper,
+    .webs-wrapper {
+        padding-top: 64px;
+    }
 }
 
 @media screen and (max-width: 560px) {
@@ -61,6 +72,10 @@
     .game-container {
         padding-block: 24px;
         gap: 24px;
+
+        &:first-child {
+            padding-top: 64px;
+        }
 
         .cr-container {
             padding-left: 16px;
