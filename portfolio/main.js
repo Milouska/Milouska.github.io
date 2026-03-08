@@ -382,6 +382,7 @@ const ticketButton = document.querySelector("#ticket-spawner");
 
 ticketButton.addEventListener("click", () => {
     updateTickets();
+    console.log("hovno");
     ticketButton.style.display = "none";
 });
 
@@ -394,7 +395,7 @@ function updateTickets() {
 
     let mailWidth = mailWrapper.offsetWidth;
 
-    const ticketCount = Math.round(Number(mailWidth) / 70);
+    const ticketCount = Math.max(Math.round(Number(mailWidth) / 70), 4);
 
     for (let i = 0; i < ticketCount; i++) {
 
