@@ -691,13 +691,14 @@ nav {
         flex-direction: column;
         gap: 12px;
         padding: 16px;
-        height: 256px;
         border-left: 2px solid var(--gray);
         border-right: 2px solid var(--gray);
         background-color: var(--contact-color);
         transition: background-color ease-in 0.1s;
 
         span {
+            display: flex;
+            justify-content: space-between;
             -webkit-user-select: none; /* Safari */
             -ms-user-select: none; /* IE 10 and IE 11 */
             user-select: none; /* Standard syntax */
@@ -706,8 +707,29 @@ nav {
             color: var(--white);
 
             &:last-child {
-                padding-top: 100px;
-                padding-bottom: 24px;
+                padding-top: 15vh;
+                bottom: 0px;
+            }
+
+            a {
+                -webkit-user-select: none; /* Safari */
+                -ms-user-select: none; /* IE 10 and IE 11 */
+                user-select: none; /* Standard syntax */
+
+                display: none;
+                width: fit-content;
+                font-size: 1.5rem;
+                color: var(--accent);
+                text-decoration: underline;
+                text-underline-offset: 4px;
+                text-decoration-thickness: 2px;
+                cursor: pointer;
+                
+                &:hover {
+                    background-color: var(--accent);
+                    color: var(--black);
+                    text-decoration: none;
+                }
             }
         }
 

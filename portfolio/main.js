@@ -161,6 +161,8 @@ function capitalize(text) {
     return text.charAt(0).toUpperCase() + text.substring(1).toLowerCase();
 }
 
+
+
 function updateBanner(text) {
     for (let i = 0; i < text.length; i++) {
         const newLetter = document.createElement("span");
@@ -187,10 +189,24 @@ function updateBanner(text) {
 }
 
 
-//GAME CONTAINER CAROUSELS
+//UPDATE WHEN RESIZED
+//CAROUSELS
+//TICKETS
+//NAVBAR
+let resizeTimeout;
+
 window.addEventListener('resize', () => {
-    updateTickets();
     updateWidth();
+    clearTimeout(resizeTimeout);
+
+    resizeTimeout = setTimeout(() => {
+        // This runs after resizing has stopped
+        changePage(prevLinkName);
+        updateWidth();
+        updateTickets();
+
+        console.log("Resize finished");
+    }, 100); // adjust delay if needed
 })
 
 const containers = document.querySelectorAll(".cr-container");
@@ -362,100 +378,114 @@ function deleteToast(toast) {
 }
 
 const mailWrapper = document.querySelector(".mail-wrapper");
-const colorGray = window.getComputedStyle(document.body)
-        .getPropertyValue("--gray");
+const ticketButton = document.querySelector("#ticket-spawner");
 
-let offsetX = 0;
-let offsetY = 0;
+ticketButton.addEventListener("click", () => {
+    updateTickets();
+    ticketButton.style.display = "none";
+});
 
-const tickets = [];
-let ticketCount = 8;
+function updateTickets() {
+    mailWrapper.innerHTML = "";
+    let offsetX = 0;
+    let offsetY = 0;
 
-if (isMobile()) ticketCount = 4;
+    const tickets = [];
 
-for (let i = 0; i < ticketCount; i++) {
-    const ticket = document.createElement("div");
+    let mailWidth = mailWrapper.offsetWidth;
 
-    ticket.addEventListener("mousedown", (e) => {
-        if (!ticket.classList.contains("fall")) {
-            ticket.classList.add("drag");
-            ticket.style.transform = "translateY(48px) rotate(-15deg)";
-            ticket.style.zIndex = "10";
+    const ticketCount = Math.round(Number(mailWidth) / 70);
 
-            //calculate offset inside element
-            offsetY = e.clientY - ticket.offsetTop;
-            offsetX = e.clientX - ticket.offsetLeft;
+    for (let i = 0; i < ticketCount; i++) {
 
-            //copy to clipboard
-            if (ticket.classList.contains("tel")) {
-                const telefon = ['(+420) ', '732 ', '254 ', '277'].join('');
-                navigator.clipboard.writeText(telefon);
-            } else {
-                const mail = ['masinkahu', '@', 'gmail.', 'com'].join('');
-                navigator.clipboard.writeText(mail);
+        const ticket = document.createElement("div");
+
+        ticket.addEventListener("mousedown", (e) => {
+            if (!ticket.classList.contains("fall")) {
+                ticket.classList.add("drag");
+                ticket.style.transform = "translateY(48px) rotate(-15deg)";
+                ticket.style.zIndex = "10";
+
+                //display inline-block to ticket spawner
+                ticketButton.style.display = "inline-block";
+
+                //calculate offset inside element
+                offsetY = e.clientY - ticket.offsetTop;
+                offsetX = e.clientX - ticket.offsetLeft;
+
+                //copy to clipboard
+                if (ticket.classList.contains("tel")) {
+                    const telefon = ['(+420) ', '732 ', '254 ', '277'].join('');
+                    navigator.clipboard.writeText(telefon);
+                } else {
+                    const mail = ['masinkahu', '@', 'gmail.', 'com'].join('');
+                    navigator.clipboard.writeText(mail);
+                }
+
+                //create toast
+                const existingToasts = document.querySelectorAll(".toast");
+                existingToasts.forEach(deleteToast);
+
+                const toast = document.createElement("span");
+                toast.classList.add("toast");
+                toast.textContent = "COPIED TO CLIPBOARD";
+                toast.style.top = ticket.getBoundingClientRect().top + "px";
+                toast.style.left = ticket.offsetLeft + ticket.offsetWidth/2 + "px";
+
+                setTimeout(() => {
+                    deleteToast(toast);
+                }, 1000);
+
+                mailWrapper.appendChild(toast);
             }
+        });
 
-            //create toast
-            const existingToasts = document.querySelectorAll(".toast");
-            existingToasts.forEach(deleteToast);
+        ticket.classList.add("mail-ticket");
+        let leftOffset = i * (100 / ticketCount);
 
-            const toast = document.createElement("span");
-            toast.classList.add("toast");
-            toast.textContent = "COPIED TO CLIPBOARD";
-            toast.style.top = ticket.getBoundingClientRect().top + "px";
-            toast.style.left = ticket.offsetLeft + ticket.offsetWidth/2 + "px";
+        ticket.style.left = leftOffset + "%";
+        ticket.style.width = 100 / ticketCount + "%";
 
-            setTimeout(() => {
-                deleteToast(toast);
-            }, 1000);
+        const ticketText = document.createElement("span");
 
-            mailWrapper.appendChild(toast);
+        if (i < ticketCount / 2) {
+            ticket.classList.add("mail");
+            ticketText.textContent = "MAIL";
+        } else {
+            ticket.classList.add("tel");
+            ticketText.textContent = "TEL.";
         }
-    });
 
-    ticket.classList.add("mail-ticket");
-    let leftOffset = i * (100 / ticketCount);
-
-    ticket.style.left = leftOffset + "%";
-    ticket.style.width = 100 / ticketCount + "%";
-
-    const ticketText = document.createElement("span");
-
-    if (i < ticketCount / 2) {
-        ticket.classList.add("mail");
-        ticketText.textContent = "MAIL";
-    } else {
-        ticket.classList.add("tel");
-        ticketText.textContent = "TEL.";
+        ticket.appendChild(ticketText);
+        mailWrapper.appendChild(ticket);
+        tickets.push(ticket);
     }
 
-    ticket.appendChild(ticketText);
-    mailWrapper.appendChild(ticket);
-    tickets.push(ticket);
+    document.addEventListener("mouseup", () => {
+        tickets.forEach((ticket) => {
+            if (ticket.classList.contains("drag")) {
+                ticket.classList.remove("drag");
+                ticket.classList.add("fall");
+                ticket.style.transform = "translateY(120vh) rotate(35deg)";
+
+                ticket.addEventListener("transitionend", () => {
+                    ticket.remove();
+                }, { once: true });
+            }
+        })
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        tickets.forEach((ticket) => {
+            if (ticket.classList.contains("drag")) {
+                ticket.style.left = e.clientX - offsetX + "px";
+                ticket.style.top = e.clientY - offsetY + "px";
+            }
+        })
+    });
 }
 
-document.addEventListener("mouseup", () => {
-    tickets.forEach((ticket) => {
-        if (ticket.classList.contains("drag")) {
-            ticket.classList.remove("drag");
-            ticket.classList.add("fall");
-            ticket.style.transform = "translateY(120vh) rotate(35deg)";
-
-            ticket.addEventListener("transitionend", () => {
-                ticket.remove();
-            }, { once: true });
-        }
-    })
-});
-
-document.addEventListener("mousemove", (e) => {
-    tickets.forEach((ticket) => {
-        if (ticket.classList.contains("drag")) {
-            ticket.style.left = e.clientX - offsetX + "px";
-            ticket.style.top = e.clientY - offsetY + "px";
-        }
-    })
-});
+updateTickets();
 
 //AFTER LOADING EVERYTHING - PUT DISPLAY NONE TO NONVISIBLE CARDS
 //SO THE VIEWER CANNOT PRESS LINKS AND STUFF
