@@ -194,22 +194,49 @@ function updateBanner(text) {
 //TICKETS
 //NAVBAR
 let resizeTimeout;
+let changedToMobile = true;
+let changedToDesktop = true;
 
 window.addEventListener('resize', () => {
-    updateWidth();
     clearTimeout(resizeTimeout);
+    updateCarousel(containers);
 
     resizeTimeout = setTimeout(() => {
-        // This runs after resizing has stopped
-        changePage(prevLinkName);
-        updateWidth();
-        updateTickets();
-
-        console.log("Resize finished");
+        if (isMobile() && changedToMobile) {
+            changePage(prevLinkName);
+            changedToMobile = false;
+            changedToDesktop = true;
+        } else if (!isMobile() && changedToDesktop){
+            changePage(prevLinkName);
+            changedToMobile = true;
+            changedToDesktop = false;
+        }
+        updateTickets(); //works kinda
     }, 100); // adjust delay if needed
-})
+});
 
 const containers = document.querySelectorAll(".cr-container");
+
+//get width of the container
+let width;
+
+function updateCarousel(carousels) {
+    for (const container of carousels) {
+        //selecting all elements in one carousel container
+        const wrap = container.querySelector(".cr-slide-wrap");
+        const wrapInner = container.querySelector(".cr-slide-wrap-inner");
+
+        //get width of the container
+        width = container.getBoundingClientRect().width;
+
+        wrapInner.style.left = `${-container.activeSlide * width}px`;
+
+        //tell slides the width of one column
+        for (const slide of wrapInner.children) {
+            slide.style.width = `${width}px`
+        }
+    }
+}
 
 //looping through all carousel containers
 for (const container of containers) {
@@ -226,11 +253,10 @@ for (const container of containers) {
     //set height of container
     wrap.style.height = height;
 
-    //get width of the container
-    let width;
-
     function updateWidth() {
         width = container.getBoundingClientRect().width;
+
+        wrapInner.style.left = `${-activeSlide * width}px`;
 
         //tell slides the width of one column
         for (const slide of wrapInner.children) {
