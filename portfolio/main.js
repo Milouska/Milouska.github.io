@@ -169,7 +169,7 @@ function updateBanner(text) {
         
         const letterHeight = parseFloat(
             getComputedStyle(document.body).getPropertyValue("--nav-banner-size")
-        ) || 32; // fallback
+        ) || 70; // fallback
     
         newLetter.innerHTML = text.charAt(i);
         newLetter.style.top = `${i * letterHeight}px`;
