@@ -5,9 +5,9 @@ const photos = photoWrapper.children;
 
 function activePhoto(index) {
     for (let i = 0; i < photos.length; i++) {
-        photos[i].style.display = "none";
+        photos[i].style.zIndex = 0;
         if (i == index) {
-            photos[i].style.display = "block";
+            photos[i].style.zIndex = 10;
         }
     }
 }

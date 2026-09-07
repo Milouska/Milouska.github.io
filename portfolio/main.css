@@ -263,6 +263,7 @@ nav {
     margin: auto;
     padding-top: 48px;
     padding-inline: 32px;
+    position: relative;
 
     .info {
         width: 100%;
@@ -278,9 +279,13 @@ nav {
         height: 100%;
         width: 100%;
         margin-inline: auto;
+        position: relative;
 
 
         img {
+            position: absolute;
+            top: 0;
+            left: 0;
             display: block;
             width: 100%;
             object-fit: cover;
@@ -296,6 +301,7 @@ nav {
         display: block;
         background: transparent;
         margin: auto;
+        margin-top: 420px;
     }
 
     /* ANYTHING ELSE */
