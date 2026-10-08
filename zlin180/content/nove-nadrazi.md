@@ -1,0 +1,1 @@
+A je to tak
